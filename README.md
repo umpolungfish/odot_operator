@@ -223,8 +223,8 @@ print(f"Frobenius ratio: {agent.frobenius_ratio:.2%}")
 import json
 print(json.dumps(agent.structural_type, indent=2))
 # {
-#   "tuple": "D_odot; T_boxtimes; R_lr; P_pm_sym; ...",
-#   "interface_P": "P_pm_sym",
+#   "tuple": "Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; φ̂_ÿ; Ħ_A; Σ_S; Ω_z",
+#   "interface_P": "Φ_}",
 #   "ouroboricity": "O_inf",
 #   "frobenius_ratio": 0.94,
 #   "windings": 7,

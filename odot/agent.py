@@ -114,7 +114,7 @@ def _build_client(base_url: str = "", api_key: str = "") -> Any:
     if not is_local:
         headers = {
             "HTTP-Referer": os.environ.get("OPENROUTER_REFERER", "https://github.com/umpolungfish/odot_operator"),
-            "X-Title": "⊙perator",
+            "X-Title": "odot-operator",
         }
 
     return openai.OpenAI(api_key=api_key, base_url=base_url, default_headers=headers)
@@ -460,11 +460,11 @@ class OdotAgent:
         )
 
     def _trim_history(self, keep_recent: int = 6, max_content_chars: int = 12_000) -> None:
-        """Context overflow recovery — Omega_Z violation.
+        """Context overflow recovery — Ω_z violation.
 
         Trimming breaks the topologically protected winding record. Every
-        invocation is a documented violation. The agent's Omega_Z guarantee
-        degrades toward Omega_0 for the remainder of the run.
+        invocation is a documented violation. The agent's Ω_z guarantee
+        degrades toward Ω_Å for the remainder of the run.
         """
         system = self._messages[0]
         task   = self._messages[1]
@@ -476,13 +476,13 @@ class OdotAgent:
             summary = {
                 "role": "user",
                 "content": (
-                    f"[Omega_Z VIOLATION — context overflow: {dropped} older windings permanently "
+                    f"[Ω_z VIOLATION — context overflow: {dropped} older windings permanently "
                     f"lost. Imscriptive context compromised. Continue from the most recent winding.]"
                 ),
             }
             self._messages = [system, task, summary] + recent
             self._log(
-                f"  [Omega_Z VIOLATION: {dropped} windings dropped from context. "
+                f"  [Ω_z VIOLATION: {dropped} windings dropped from context. "
                 f"{len(self._messages)} messages remain.]"
             )
 
@@ -491,7 +491,7 @@ class OdotAgent:
             if isinstance(content, str) and len(content) > max_content_chars:
                 msg["content"] = (
                     content[:max_content_chars]
-                    + f"\n... [truncated {len(content) - max_content_chars} chars — Omega_Z VIOLATION]"
+                    + f"\n... [truncated {len(content) - max_content_chars} chars — Ω_z VIOLATION]"
                 )
 
     @staticmethod

@@ -73,7 +73,7 @@ def _run_command_verify(
         return ("(no assertion — Frobenius trivially closed)", True)
     ns = {"output": emit_output, "out": emit_output}
     try:
-        ok = bool(eval(assertion, {"__builtins__": {}}, ns))  # noqa: S307
+        ok = bool(eval(assertion, {"__builtins__": __builtins__}, ns))  # noqa: S307
     except Exception as exc:
         return (f"assertion eval error: {exc}", False)
     if ok:
