@@ -217,7 +217,8 @@ class OdotAgent:
                 parts.append(f"### Winding {cycle.winding}")
                 parts.append(f"**THINK:** {cycle.think}")
                 parts.append(f"**ACT:** {cycle.action.tool_name}({json.dumps(cycle.action.emit_input)[:500]})")
-                parts.append(f"**OBSERVE:** {cycle.action.verify_output[:300]}")
+                parts.append(f"**OBSERVE (result):** {cycle.action.emit_output[:2000]}")
+                parts.append(f"**VERIFY:** {cycle.action.verify_output[:300]}")
                 parts.append(f"**Frobenius:** {'CLOSED ✓' if cycle.action.frobenius_closed else 'OPEN ✗'}")
                 parts.append("")
 

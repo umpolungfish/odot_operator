@@ -1,3 +1,12 @@
+fix: feed emit_output back to LLM in winding context (2026-06-03)
+
+agent.py — _build_llm_prompt surfaced only verify_output in OBSERVE, never
+emit_output. Model never saw actual tool results (file contents, command stdout),
+causing infinite retry loops (600+ windings with no information gain).
+Fix: add "OBSERVE (result): emit_output[:2000]" before VERIFY line.
+
+---
+
 fix: native OpenAI function-calling replaces text-based tool protocol
 
 json_object mode made things worse — model output {"reasoning":"..."} with no
