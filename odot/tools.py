@@ -218,7 +218,8 @@ def _web_fetch_verify(
 # ── done ───────────────────────────────────────────────────────────────────────
 
 def _done_emit(args: Dict[str, Any]) -> str:
-    return args.get("conclusion", "(no conclusion provided)")
+    # "raw" key comes from the function-call fallback parser in _parse_tool_call
+    return args.get("conclusion") or args.get("raw") or "(no conclusion provided)"
 
 
 def _done_verify(

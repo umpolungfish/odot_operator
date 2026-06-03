@@ -1,16 +1,18 @@
 [project]
 name = "odot"
-version = "0.1.0"
-description = "The ⊙perator — a self-verifying agentic loop"
+version = "0.2.1"
+description = "The ⊙perator — a self-verifying agentic loop with multi-provider LLM support"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = { text = "Unlicense" }
 dependencies = [
-    "openai>=1.0",
+    "httpx>=0.24",
 ]
 
 [project.optional-dependencies]
 web = ["httpx>=0.24"]
+deepseek = []  # DeepSeek uses httpx (already a core dep); API key via DEEPSEEK_API_KEY env var
+openrouter = []  # OpenRouter uses httpx; API key via OPENROUTER_API_KEY env var
 
 [project.scripts]
 odot = "odot.agent:_cli"
@@ -21,3 +23,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["odot"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

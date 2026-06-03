@@ -1,0 +1,93 @@
+# Provider Defaults — ⊙perator
+# Updated 2026-07-01: DeepSeek V4 models (deepseek-v4-flash, deepseek-v4-pro)
+# Old deepseek-chat / deepseek-reasoner deprecated, sunset 2026/07/24 15:59 UTC
+# See https://api-docs.deepseek.com/quick_start/pricing
+
+providers:
+  deepseek:
+    default_model: "deepseek-v4-flash"
+    base_url: "https://api.deepseek.com/chat/completions"
+    api_key_env: "DEEPSEEK_API_KEY"
+    max_tokens_default: 4096
+    temperature_default: 0.7
+    models:
+      - name: "deepseek-v4-flash"
+        description: "DeepSeek V4 Flash — General purpose, replaces deepseek-chat"
+        max_tokens: 8192
+        context: 1048576  # 1M tokens
+        use_cases: ["general", "coding", "analysis"]
+      - name: "deepseek-v4-pro"
+        description: "DeepSeek V4 Pro — Premium tier, highest quality"
+        max_tokens: 8192
+        context: 1048576
+        use_cases: ["reasoning", "complex-analysis", "imscription_generation"]
+      - name: "deepseek-chat"
+        description: "⚠ DEPRECATED — maps to deepseek-v4-flash non-thinking mode. Sunset 2026/07/24"
+        max_tokens: 4096
+        use_cases: ["general", "coding"]
+        deprecated: true
+      - name: "deepseek-reasoner"
+        description: "⚠ DEPRECATED — maps to deepseek-v4-flash thinking mode. Sunset 2026/07/24"
+        max_tokens: 8192
+        use_cases: ["reasoning"]
+        deprecated: true
+
+  openrouter:
+    default_model: "deepseek/deepseek-r1"
+    base_url: "https://openrouter.ai/api/v1/chat/completions"
+    api_key_env: "OPENROUTER_API_KEY"
+    max_tokens_default: 4096
+    temperature_default: 0.7
+    models:
+      - name: "deepseek/deepseek-r1"
+        description: "DeepSeek R1 via OpenRouter"
+        use_cases: ["reasoning", "imscription_generation"]
+      - name: "deepseek/deepseek-chat"
+        description: "⚠ DEPRECATED — DeepSeek Chat via OpenRouter"
+        use_cases: ["general", "coding"]
+        deprecated: true
+      - name: "deepseek/deepseek-v4-flash"
+        description: "DeepSeek V4 Flash via OpenRouter"
+        use_cases: ["general", "coding", "analysis"]
+      - name: "deepseek/deepseek-v4-pro"
+        description: "DeepSeek V4 Pro via OpenRouter"
+        use_cases: ["reasoning", "complex-analysis"]
+      - name: "anthropic/claude-sonnet-4-5"
+        description: "Claude Sonnet 4.5 via OpenRouter"
+        use_cases: ["general", "reasoning", "analysis"]
+      - name: "x-ai/grok-4"
+        description: "Grok 4 via OpenRouter"
+        use_cases: ["general", "coding"]
+      - name: "google/gemini-2.5-pro-preview-05-06"
+        description: "Gemini 2.5 Pro via OpenRouter"
+        use_cases: ["reasoning", "long-context"]
+
+  local:
+    default_model: "llama3.2"
+    base_url: "http://localhost:11434/v1"
+    api_key_env: "LOCAL_API_KEY"
+    max_tokens_default: 2048
+    temperature_default: 0.7
+
+# Task-based routing recommendations
+task_routing:
+  coding:
+    preferred: ["deepseek", "openrouter"]
+    default_provider: "deepseek"
+    default_model: "deepseek-v4-flash"
+  reasoning:
+    preferred: ["deepseek", "openrouter"]
+    default_provider: "deepseek"
+    default_model: "deepseek-v4-pro"
+  complex-analysis:
+    preferred: ["deepseek", "openrouter"]
+    default_provider: "deepseek"
+    default_model: "deepseek-v4-pro"
+  analysis:
+    preferred: ["deepseek", "openrouter"]
+    default_provider: "deepseek"
+    default_model: "deepseek-v4-flash"
+  general:
+    preferred: ["deepseek", "openrouter", "local"]
+    default_provider: "deepseek"
+    default_model: "deepseek-v4-flash"

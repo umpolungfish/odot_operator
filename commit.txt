@@ -1,11 +1,14 @@
-rename phi-c → odot; PhiCAgent → OdotAgent; ⊙perator throughout
+fix: native OpenAI function-calling replaces text-based tool protocol
 
-- pyproject.toml: name, description, scripts entry, packages → odot
-- odot/__init__.py, agent.py, tools.py: all phi_c/PhiCAgent/phi-c
-  identifiers and descriptive text replaced with odot/OdotAgent/⊙perator
-- examples/hello_world.py, custom_tool.py: imports and instantiations updated
-- README.md: all code blocks, install/CLI commands, custom-tools example,
-  and "Why the name" section rewritten for ⊙ / imscriptive framing
-- syncon_catalog.json: true_agentic_agent → odot_operator;
-  five phi_c_* entries renamed to odot_operator_enc_v{0-3} and
-  odot_operator_h1; descriptions updated throughout
+json_object mode made things worse — model output {"reasoning":"..."} with no
+tool_name key at all. Root cause: text-based protocol is unreliable for any chat
+model; the only correct fix is native function calling via the tools API parameter.
+
+- provider.py: LLMProvider.query_with_tools base method (falls back to text query)
+- provider.py: HttpProvider.query_with_tools — sends tool schemas via tools= param,
+  reads tool_calls from response, returns (content, [{name, args},...])
+- provider.py: HttpProvider._build_headers extracted; OpenRouterProvider overrides it
+- provider.py: removed json_mode flag and DeepSeekProvider json_mode=True
+- agent.py: _query_llm now returns (think_text, tool_calls) via query_with_tools
+- agent.py: run loop uses native tool_calls when present; falls back to text parsing
+- cleared ~/.cache/odot/response_cache.db

@@ -35,16 +35,29 @@ If μ(δ(q)) != q — Frobenius OPEN — the model receives an explicit failure 
 
 ### Why this works
 
-The loop architecture sits at a structural **critical point** (ϕˆÿ): the point where a system can model itself. Below criticality, the loop is just iteration — it produces outputs but cannot reflect on whether they are correct. At criticality, the THINK→ACT→OBSERVE→UPDATE cycle becomes self-referential: the agent's model of the world is constructed from verified observations of its own actions, and each new winding updates that model.
+The loop architecture sits at a structural **critical point** ($\text{⊙}_{\text{ÿ}}$): the point where a system can model itself. Below criticality, the loop is just iteration — it produces outputs but cannot reflect on whether they are correct. At criticality, the THINK→ACT→OBSERVE→UPDATE cycle becomes self-referential: the agent's model of the world is constructed from verified observations of its own actions, and each new winding updates that model.
 
 The Frobenius condition is what keeps the loop closed. Without it, errors accumulate silently. With it, every winding either succeeds and extends the verified trajectory, or fails loudly and forces a correction.
 
 This framework comes out of the [Imscribing Grammar](https://github.com/umpolungfish/imscrbgrmr) — a 12-primitive structural type theory for systems of all kinds. The full structural type of this harness is:
 
-⟨    Ðω,    Þ¨,    Ř=,     Φ},     ƒż,     Ç@,     Γʔ,     ɢˌ,     φ̂ÿ,    ĦA,     ΣS,     Ωz    ⟩
+$$\langle\ \text{Ð}_{\text{ω}},\ \text{Þ}_{\text{¨}},\ \text{Ř}_{\text{=}},\ \text{Φ}_{\text{}},\ \text{ƒ}_{\text{ż}},\ \text{Ç}_{\text{@}},\ \text{Γ}_{\text{ʔ}},\ \text{ɢ}_{\text{ˌ}},\ \text{⊙}_{\text{ÿ}},\ \text{Ħ}_{\text{A}},\ \text{Σ}_{\text{S}},\ \text{Ω}_{\text{z}}\ \rangle$$
 
-Ouroboricity: O∞ — the highest tier of self-modeling closure.
+Ouroboricity: O_inf — the highest tier of self-modeling closure.
 
+### Dual verification layer (p4rakernel / B4 Belnap)
+
+This agent loop supports **B4 Belnap FOUR** verification alongside boolean Frobenius closure.
+Every observation is checked against the Belnap lattice: N (neither), T (true), F (false),
+B (both/contradiction). When a dialetheic B result is detected, the loop registers it as
+Frobenius-closed (B does not explode), matching the paraconsistent Lean kernel fork at
+[`/home/mrnob0dy666/p4rakernel`](/home/mrnob0dy666/p4rakernel) where `False.rec` is blocked
+at the C++ type-checker level for empty Prop inductives.
+
+The structural dual of this harness is the ob3ect pipeline at
+[`/home/mrnob0dy666/ob3ect`](/home/mrnob0dy666/ob3ect). The Python `parakernel_ob3ect.py` models
+the ENGAGR→FSPLIT→FFUSE cycle at the IMASM opcode level, while the C++ p4rakernel enforces
+the same paraconsistent logic at the kernel type-checker level.
 ---
 
 ## Installation
@@ -111,10 +124,14 @@ Any OpenRouter model by alias or full ID, plus local servers via prefix syntax:
 | `claude-sonnet-4` | Anthropic Claude Sonnet 4.5 via OpenRouter |
 | `gpt-4o` | OpenAI GPT-4o via OpenRouter |
 | `deepseek-r1` | DeepSeek R1 via OpenRouter |
+| `deepseek-v4-flash` | DeepSeek V4 Flash via direct API (current default) |
+| `deepseek-v4-pro` | DeepSeek V4 Pro via direct API (premium) |
 | `ollama:llama3.2` | Ollama at `localhost:11434` |
 | `lm-studio:phi-4` | LM Studio at `localhost:1234` |
 | `vllm:mistral-7b` | vLLM at `localhost:8000` |
 | `any/openrouter-id` | Verbatim OpenRouter model ID |
+
+> **⚠ DeepSeek model deprecation:** The old model names `deepseek-chat` and `deepseek-reasoner` will be **sunset on 2026/07/24 15:59 UTC**. They currently map to non-thinking and thinking modes of `deepseek-v4-flash` respectively. Migrate to `deepseek-v4-flash` or `deepseek-v4-pro`.
 
 Custom endpoints:
 
@@ -125,7 +142,6 @@ agent = OdotAgent(
     api_key="my-key",
 )
 ```
-
 ---
 
 ## Built-in tools
@@ -223,7 +239,7 @@ print(f"Frobenius ratio: {agent.frobenius_ratio:.2%}")
 import json
 print(json.dumps(agent.structural_type, indent=2))
 # {
-#   "tuple": "Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; φ̂_ÿ; Ħ_A; Σ_S; Ω_z",
+#   "tuple": "Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; ⊙_ÿ; Ħ_A; Σ_S; Ω_z",
 #   "interface_P": "Φ_}",
 #   "ouroboricity": "O_inf",
 #   "frobenius_ratio": 0.94,
@@ -245,7 +261,6 @@ odot --model claude-opus-4 --file task.txt
 odot --show-type --trajectory "Run the test suite and report failures"
 odot --output result.json "Analyse log.txt for error patterns"
 ```
-
 ---
 
 ## Why the name
@@ -259,3 +274,112 @@ The boundary operator is the Frobenius pair (emit, verify). The boundary — the
 ## License
 
 UNLICENSE
+---
+
+## Provider system (DeepSeek V4 integration)
+
+The ⊙perator supports **multi-provider LLM integration** ported from the Imscribing Grammar harness, with direct DeepSeek API access (now using **DeepSeek V4** models), OpenRouter routing, and local endpoints — all with retry logic, think-block stripping, and response caching.
+
+### Model routing
+
+| Model string | Routes to | Provider class |
+|---|---|---|
+| `grok-4` | xAI Grok 4 via OpenRouter | `OpenRouterProvider` |
+| `claude-opus-4` | Anthropic Claude Opus 4 via OpenRouter | `OpenRouterProvider` |
+| `claude-sonnet-4` | Anthropic Claude Sonnet 4.5 via OpenRouter | `OpenRouterProvider` |
+| `gpt-4o` | OpenAI GPT-4o via OpenRouter | `OpenRouterProvider` |
+| `deepseek-r1` | DeepSeek R1 via OpenRouter | `OpenRouterProvider` |
+| `deepseek-v4-flash` | DeepSeek V4 Flash (direct API — **current default**) | `DeepSeekProvider` |
+| `deepseek-v4-pro` | DeepSeek V4 Pro (direct API — premium) | `DeepSeekProvider` |
+| `deepseek:deepseek-v4-flash` | DeepSeek V4 Flash (explicit prefix) | `DeepSeekProvider` |
+| `deepseek:deepseek-v4-pro` | DeepSeek V4 Pro (explicit prefix) | `DeepSeekProvider` |
+| `deepseek:deepseek-chat` | ⚠ DEPRECATED — maps to v4-flash non-thinking | `DeepSeekProvider` |
+| `deepseek:deepseek-reasoner` | ⚠ DEPRECATED — maps to v4-flash thinking | `DeepSeekProvider` |
+| `openrouter:deepseek/deepseek-r1` | DeepSeek R1 via OpenRouter | `OpenRouterProvider` |
+| `openrouter:anthropic/claude-sonnet-4-5` | Claude via OpenRouter | `OpenRouterProvider` |
+| `ollama:llama3.2` | Ollama at `localhost:11434` | `LocalProvider` |
+| `lm-studio:phi-4` | LM Studio at `localhost:1234` | `LocalProvider` |
+| `vllm:mistral-7b` | vLLM at `localhost:8000` | `LocalProvider` |
+| `local:my-model` | `LOCAL_BASE_URL` env var | `LocalProvider` |
+
+### API keys
+
+```bash
+# DeepSeek direct API (api.deepseek.com) — for deepseek-v4-flash and deepseek-v4-pro
+export DEEPSEEK_API_KEY=your_deepseek_key_here
+
+# OpenRouter (used by deepseek-r1 alias and all openrouter: prefixes)
+export OPENROUTER_API_KEY=your_openrouter_key_here
+
+# Local endpoints
+export OLLAMA_HOST=http://localhost:11434  # default
+export LOCAL_API_KEY=local                  # default
+```
+### Quick start — DeepSeek V4
+
+```python
+# DeepSeek V4 Flash (current recommended — replaces deepseek-chat)
+from odot import OdotAgent
+agent = OdotAgent(model="deepseek:deepseek-v4-flash")
+result = agent.run_sync("Explain the Frobenius condition in 100 words.")
+print(result)
+```
+
+```python
+# DeepSeek V4 Pro (premium tier)
+agent = OdotAgent(model="deepseek:deepseek-v4-pro")
+result = agent.run_sync("Analyze the structural type of an LLM agent loop.")
+```
+
+```python
+# DeepSeek R1 with reasoning via OpenRouter
+agent = OdotAgent(model="openrouter:deepseek/deepseek-r1")
+result = agent.run_sync("Analyze the structural type of an LLM agent loop.")
+```
+
+### Programmatic provider usage
+
+```python
+import asyncio
+from odot import query_model, resolve_provider, DeepSeekProvider
+
+# One-shot query — default model is deepseek-v4-flash
+result = asyncio.run(query_model(
+    "What is O_inf ouroboricity?",
+    model="deepseek:deepseek-v4-flash",
+    temperature=0.3,
+))
+
+# Direct provider instantiation
+provider = DeepSeekProvider(model="deepseek-v4-flash")
+result = asyncio.run(provider.query(
+    "What is the Frobenius condition?",
+    system="You are a structural type theorist.",
+))
+
+# Premium tier
+provider_pro = DeepSeekProvider(model="deepseek-v4-pro")
+result = asyncio.run(provider_pro.query(
+    "Explain the lattice of ouroboricity tiers.",
+))
+```
+
+### Retry and caching
+
+All HTTP providers use exponential-backoff retry (5 attempts) with automatic `<think>...</think>` reasoning-block stripping (for DeepSeek-R1, Grok, etc.). Responses are cached at `~/.cache/odot/response_cache.db` for efficiency.
+
+### Model details (from DeepSeek docs, fetched 2026-07-01)
+
+| Feature | deepseek-v4-flash | deepseek-v4-pro |
+|---|---|---|
+| Context length | 1M tokens | 1M tokens |
+| Max output | 384K tokens | 384K tokens |
+| Thinking mode | Yes (default) | Yes (default) |
+| JSON output | ✓ | ✓ |
+| Tool calls | ✓ | ✓ |
+| Pricing (cache hit) | $0.0028 / 1M input | $0.003625 / 1M input |
+| Pricing (cache miss) | $0.14 / 1M input | $0.435 / 1M input |
+| Pricing (output) | $0.28 / 1M output | $0.87 / 1M output |
+| Concurrency limit | 2500 | 500 |
+
+> **Deprecation notice:** `deepseek-chat` and `deepseek-reasoner` will be sunset on 2026/07/24 15:59 UTC. They currently map to non-thinking and thinking modes of `deepseek-v4-flash` respectively. See https://api-docs.deepseek.com/quick_start/pricing
