@@ -43,7 +43,7 @@ This framework comes out of the [Imscribing Grammar](https://github.com/umpolung
 
 $$\langle\ \text{Ð}_{\text{ω}},\ \text{Þ}_{\text{¨}},\ \text{Ř}_{\text{=}},\ \text{Φ}_{\text{}},\ \text{ƒ}_{\text{ż}},\ \text{Ç}_{\text{@}},\ \text{Γ}_{\text{ʔ}},\ \text{ɢ}_{\text{ˌ}},\ \text{⊙}_{\text{ÿ}},\ \text{Ħ}_{\text{A}},\ \text{Σ}_{\text{S}},\ \text{Ω}_{\text{z}}\ \rangle$$
 
-Ouroboricity: O_inf — the highest tier of self-modeling closure.
+Ouroboricity: O_∞ — the highest tier of self-modeling closure.
 
 ### Dual verification layer (p4rakernel / B4 Belnap)
 
@@ -241,7 +241,7 @@ print(json.dumps(agent.structural_type, indent=2))
 # {
 #   "tuple": "Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; ⊙_ÿ; Ħ_A; Σ_S; Ω_z",
 #   "interface_P": "Φ_}",
-#   "ouroboricity": "O_inf",
+#   "ouroboricity": "O_∞",
 #   "frobenius_ratio": 0.94,
 #   "windings": 7,
 #   "omega_z_violations": 0,
@@ -249,7 +249,7 @@ print(json.dumps(agent.structural_type, indent=2))
 # }
 ```
 
-`ouroboricity` is `O_inf` when the Frobenius ratio is ≥ 75% — meaning the agent achieved probabilistic self-modeling closure over the run. Below that threshold it degrades to `O_2`. `omega_z_violations` counts how many times the context had to be trimmed (each trim breaks the topologically protected winding record).
+`ouroboricity` is `O_∞` when the Frobenius ratio is ≥ 75% — meaning the agent achieved probabilistic self-modeling closure over the run. Below that threshold it degrades to `O₂`. `omega_z_violations` counts how many times the context had to be trimmed (each trim breaks the topologically protected winding record).
 
 ---
 
@@ -345,7 +345,7 @@ from odot import query_model, resolve_provider, DeepSeekProvider
 
 # One-shot query — default model is deepseek-v4-flash
 result = asyncio.run(query_model(
-    "What is O_inf ouroboricity?",
+    "What is O_∞ ouroboricity?",
     model="deepseek:deepseek-v4-flash",
     temperature=0.3,
 ))

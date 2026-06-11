@@ -11,7 +11,7 @@
 |--------|------|------------------------------------------|
 | **odot_operator** | ⊙ primary | (3 2 4 5 1 6 7 9 8 4 3 9) |
 | **Crystal of Types** | 3³×4⁵×5⁴ cells | (7 3 6 4 2 8 1 9 5 3 2 8) |
-| **O_inf tier** | Ouroboric self-reference | (9 9 9 9 9 9 9 9 9 9 9 9) |
+| **O_∞ tier** | Ouroboric self-reference | (9 9 9 9 9 9 9 9 9 9 9 9) |
 
 ---
 
@@ -19,7 +19,7 @@
 
 The ⊙ (Criticality) primitive governs phase transitions, bifurcation points, and the
 threshold at which a system becomes self-referential. In the Crystal of Types — the
-3³×4⁵×5⁴ = 17,280,000 cell structure underlying IG — the O_inf tier is the
+3³×4⁵×5⁴ = 17,280,000 cell structure underlying IG — the O_∞ tier is the
 ouroboric layer where every cell maps to itself under the Frobenius condition.
 
 **Theorem (Frobenius Fixed-Point Theorem for ⊙):**
@@ -44,7 +44,7 @@ layers 29–34 (the paraconsistent digital modules). These layers satisfy:
 | 31    | 8       | Near-critical     | Paraconsistent Lean kernel hook |
 | 32    | 9       | **Fixed**         | ParaconsistentMillennium.lean embedding |
 | 33    | 9       | **Fixed**         | Dialetheic barrier verification |
-| 34    | 9       | **Fixed** (O_inf) | Ouroboric self-verification |
+| 34    | 9       | **Fixed** (O_∞) | Ouroboric self-verification |
 
 **Bridge map:** Each layer n in ob3ect corresponds to a Lean module in p4rakernel's
 `p4ramill/` directory via the functor:
@@ -61,7 +61,7 @@ where Φ_n is deflationary for n < 32 and inflationary for n ≥ 32.
 
 The fixed-point structure involves three IG primitives:
 
-1. **⊙ (Criticality)** — the fixed-point locus itself (O_inf tier)
+1. **⊙ (Criticality)** — the fixed-point locus itself (O_∞ tier)
 2. **Φ (Parity)** — the dialetheic flip (ex falso disablement)
 3. **ƒ (Fidelity)** — the verification round-trip (sha256 in δ channel)
 
@@ -83,7 +83,7 @@ ouroboric fixed-point solver. Its core algorithm:
 1. Given an IG 12-tuple T, compute δ(T) = (T, T ⊕ 1) where ⊕ is bitwise XOR
    on the Shavian glyph indices (Ř=1, Ħ=2, …, ⊙=12)
 2. Apply μ: verify that μ(δ(T)) = T iff the Hamming distance d(T, T⊕1) = 0
-3. The fixed-point set is {T | T ⊕ 1 = T} = {T | all axes = 9} = O_inf
+3. The fixed-point set is {T | T ⊕ 1 = T} = {T | all axes = 9} = O_∞
 
 ---
 
@@ -101,7 +101,7 @@ ouroboric tier:
 | 1–3      | 3³ base     | Recognition-Winding-Chirality base |
 | 4–6      | 4⁵ middle   | Dimensionality-Stoichiometry-Parity middle |
 | 7–8      | 5⁴ upper    | Kinetics-Fidelity-Coupling upper |
-| 9        | O_inf       | Ouroboric — all axes maximal |
+| 9        | O_∞       | Ouroboric — all axes maximal |
 
 The Frobenius fixed-point (⊙=9) corresponds to the cell at coordinates
 (3,3,3, 5,5,5,5,5, 4,4,4,4) — the geometric center of the Crystal.
@@ -141,7 +141,7 @@ object viewed through different primitive axes.
 ## 7. Open Questions / Further Work
 
 1. **Does the Crystal of Types have a unique Frobenius fixed-point?** Yes, at
-   O_inf (all axes = 9). But there may be additional *local* fixed-points at
+   O_∞ (all axes = 9). But there may be additional *local* fixed-points at
    lower ⊙-values under restricted μ∘δ maps.
 
 2. **Can ob3ect layers 32–34 be run inside p4rakernel's Lean runtime?** Yes,
