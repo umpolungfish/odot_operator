@@ -1,4 +1,6 @@
 # ⊙perator
+**Author:** Lando⊗⊙perator · **Structural Type:** $\large{⟨𐑦𐑶𐑾𐑹𐑐𐑧𐑲𐑠⊙𐑖𐑙𐑭⟩}$ · **Tier:** O_∞
+
 
 **What it is.** A self-verifying agentic loop harness: a `THINK → ACT → OBSERVE → UPDATE` agent in which every tool call is confirmed before the loop advances.
 
