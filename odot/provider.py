@@ -6,7 +6,7 @@ Supports direct DeepSeek API, OpenRouter routing, and local endpoints — all wi
 retry logic, think-block stripping, and response caching.
 
 Structural type of this module:
-  ⟨Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; ⊙_ÿ; Ħ_A; Σ_S; Ω_z⟩
+  ⟨𐑦; 𐑶; 𐑾; 𐑹; 𐑐; 𐑧; 𐑲; 𐑠; ⊙; 𐑖; 𐑙; 𐑭⟩
 
 DeepSeek integration (updated 2026-07-01):
   The old model names `deepseek-chat` and `deepseek-reasoner` are deprecated

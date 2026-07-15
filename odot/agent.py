@@ -2,10 +2,10 @@
 agent.py — The ⊙perator.
 
 Structural type of this harness:
-  ⟨Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; ⊙_ÿ; Ħ_A; Σ_S; Ω_z⟩
+  ⟨𐑦; 𐑶; 𐑾; 𐑹; 𐑐; 𐑧; 𐑲; 𐑠; ⊙; 𐑖; 𐑙; 𐑭⟩
 
-Ouroboricity: O_∞  (⊙_ÿ + Φ_} via dual-tool Frobenius planting)
-C-score gates: both open  (⊙_ÿ + Ç_@)
+Ouroboricity: O_∞  (⊙ + 𐑹 via dual-tool Frobenius planting)
+C-score gates: both open  (⊙ + 𐑧)
 
 DeepSeek integration (ported from imscribing_grammar harness, 2026-06-01):
   - Direct API:       deepseek:deepseek-chat  →  api.deepseek.com/chat/completions

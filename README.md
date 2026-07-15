@@ -58,6 +58,6 @@ The `assertion` field is what makes `run_command` Frobenius-aware, e.g. `asserti
 
 ## Trajectory and structural type
 
-Each run exposes its per-winding Frobenius closure rate and a full structural-type annotation, e.g. `{tuple: "Ð_ω; Þ_¨; Ř_=; Φ_}; ƒ_ż; Ç_@; Γ_ʔ; ɢ_ˌ; ⊙_ÿ; Ħ_A; Σ_S; Ω_z", interface_P: "Φ_}", ouroboricity: "O_∞", frobenius_ratio: 0.94, windings: 7, omega_z_violations: 0, done: true}`.
+Each run exposes its per-winding Frobenius closure rate and a full structural-type annotation, e.g. `{tuple: "𐑦; 𐑶; 𐑾; 𐑹; 𐑐; 𐑧; 𐑲; 𐑠; ⊙; 𐑖; 𐑙; 𐑭", interface_P: "𐑹", ouroboricity: "O_∞", frobenius_ratio: 0.94, windings: 7, omega_z_violations: 0, done: true}`.
 
 The harness comes out of the [Imscribing Grammar](https://github.com/USER/imscrbgrmr), a 12-primitive structural type theory. License in-repo.
