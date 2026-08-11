@@ -368,7 +368,7 @@ def resolve_provider(model_str: str) -> LLMProvider:
         deepseek:deepseek-chat      → DeepSeekProvider (⚠ deprecated 2026/07/24)
         openrouter:deepseek/deepseek-r1  → OpenRouterProvider
         ollama:llama3.2              → LocalProvider at localhost:11434/v1
-        local:my-model               → LocalProvider at LOCAL_BASE_URL env var
+        local:my-model               → LocalProvider at IG_LOCAL_BASE_URL env var
 
     No prefix → check MODEL_ALIASES → OpenRouter default.
     """
@@ -393,7 +393,7 @@ def resolve_provider(model_str: str) -> LLMProvider:
         "lm-studio":  "http://localhost:1234/v1",
         "lmstudio":   "http://localhost:1234/v1",
         "vllm":       "http://localhost:8000/v1",
-        "local":      os.environ.get("LOCAL_BASE_URL", "http://localhost:11434/v1"),
+        "local":      os.environ.get("IG_LOCAL_BASE_URL") or os.environ.get("LOCAL_BASE_URL", "http://localhost:11434/v1"),
     }
 
     # If model_str has a prefix, resolve it directly
